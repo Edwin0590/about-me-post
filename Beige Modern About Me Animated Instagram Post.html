@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Preview — Beige Modern About Me Animated Instagram Post</title>
+  <style>
+    /* Simple, clean responsive layout */
+    body {{ margin:0; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background:#f7f3ef; color:#222; display:flex; align-items:center; justify-content:center; min-height:100vh; }}
+    .card {{ width:min(1000px, 96vw); background:white; border-radius:12px; box-shadow: 0 8px 30px rgba(20,20,30,0.08); padding:18px; display:grid; gap:14px; align-items:center; }}
+    h1 {{ margin:0; font-size:1.1rem; color:#333; }}
+    p {{ margin:0; color:#555; font-size:0.95rem; }}
+    .video-wrap {{ width:100%; aspect-ratio: 1 / 1; display:flex; align-items:center; justify-content:center; background:linear-gradient(180deg,#fff,#f3efe9); border-radius:8px; overflow:hidden; }}
+    video {{ width:100%; height:100%; object-fit:cover; display:block; background:#000; }}
+    .controls {{ display:flex; gap:8px; align-items:center; }}
+    .btn {{ background:#111; color:#fff; border:none; padding:8px 12px; border-radius:8px; cursor:pointer; font-weight:600; }}
+    .muted {{ background:#e6e6e6; color:#222; }}
+    footer {{ font-size:0.85rem; color:#666; display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; }}
+    a.download {{ text-decoration:none; color:inherit; background:#0077ff; color:#fff; padding:8px 12px; border-radius:8px; }}
+    @media (max-width:560px) {{ .card {{ padding:12px }} h1{{font-size:1rem}} }}
+  </style>
+</head>
+<body>
+  <main class="card" role="main">
+    <header>
+      <h1>Preview: Beige Modern About Me Animated Instagram Post</h1>
+      <p>Buka video ini di browser — gunakan tombol di bawah untuk mengontrol pemutaran atau mengunduh file asli.</p>
+    </header>
+
+    <div class="video-wrap" id="videoWrap">
+      <video id="theVideo" playsinline controls preload="metadata">
+        <source src="Beige Modern About Me Animated Instagram Post.mp4" type="video/mp4">
+        Browser Anda tidak mendukung tag video. Anda dapat mengunduh file via link pada bagian bawah.
+      </video>
+    </div>
+
+    <div class="controls" aria-hidden="false">
+      <button class="btn" id="playPause">Play / Pause</button>
+      <button class="btn muted" id="muteUnmute">Mute / Unmute</button>
+      <a class="download" href="Beige Modern About Me Animated Instagram Post.mp4" download>Download MP4</a>
+    </div>
+
+    <footer>
+      <div>File: <strong>Beige Modern About Me Animated Instagram Post.mp4</strong></div>
+      <div>Ukuran file: <span id="filesize">Menghitung...</span></div>
+    </footer>
+  </main>
+
+  <script>
+    const video = document.getElementById('theVideo');
+    const playPause = document.getElementById('playPause');
+    const muteUnmute = document.getElementById('muteUnmute');
+    const filesizeEl = document.getElementById('filesize');
+
+    playPause.addEventListener('click', () => {
+      if (video.paused) {{ video.play(); }} else {{ video.pause(); }}
+    });
+
+    muteUnmute.addEventListener('click', () => {
+      video.muted = !video.muted;
+      muteUnmute.textContent = video.muted ? 'Unmute' : 'Mute';
+    });
+
+    // Try to fetch file size via HEAD request; may fail if filesystem not served from HTTP server.
+    (async function(){ 
+      try {{ 
+        const resp = await fetch('Beige Modern About Me Animated Instagram Post.mp4', {{method:'HEAD'}});
+        if (resp.ok) {{ 
+          const size = resp.headers.get('content-length');
+          if (size) {{ 
+            const kb = Math.round(size/1024);
+            filesizeEl.textContent = kb + ' KB';
+            return;
+          }}
+        }}
+      }} catch(e){{ /* ignore */ }}
+      // fallback: set unknown
+      filesizeEl.textContent = 'Tidak tersedia (buka file manager)';
+    })();
+  </script>
+</body>
+</html>
